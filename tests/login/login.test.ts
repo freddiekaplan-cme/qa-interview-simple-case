@@ -15,12 +15,12 @@ test.describe('login form tests', () => {
 
   test('should be able to log in using existing account', async ({ page }) => {
     // E-mail input
-    await page.getByLabel('Email').pressSequentially(existingUser.email)
+    await page.getByLabel('Email').fill(existingUser.email)
 
     // Password input
     await page
       .getByLabel('Password', { exact: true })
-      .pressSequentially(existingUser.password)
+      .fill(existingUser.password)
 
     // Click submit button
     await page.getByRole('button', { name: 'LOGIN' }).click()
@@ -36,12 +36,10 @@ test.describe('login form tests', () => {
     page,
   }) => {
     // E-mail input
-    await page.getByLabel('Email').pressSequentially(existingUser.email)
+    await page.getByLabel('Email').fill(existingUser.email)
 
     // Password input, using invalid password
-    await page
-      .getByLabel('Password', { exact: true })
-      .pressSequentially('wrong_password')
+    await page.getByLabel('Password', { exact: true }).fill('wrong_password')
 
     // Click submit button
     await page.getByRole('button', { name: 'LOGIN' }).click()
@@ -59,7 +57,7 @@ test.describe('login form tests', () => {
     // Password input
     await page
       .getByLabel('Password', { exact: true })
-      .pressSequentially(existingUser.password)
+      .fill(existingUser.password)
 
     // Expect submit button to be disabled
     await expect(page.getByRole('button', { name: 'LOGIN' })).toBeDisabled()
@@ -69,12 +67,12 @@ test.describe('login form tests', () => {
     page,
   }) => {
     // E-mail input, using e-mail without @
-    await page.getByLabel('Email').pressSequentially('test1mail.com')
+    await page.getByLabel('Email').fill('test1mail.com')
 
     // Password input
     await page
       .getByLabel('Password', { exact: true })
-      .pressSequentially(existingUser.password)
+      .fill(existingUser.password)
 
     // Expect submit button to be disabled
     await expect(page.getByRole('button', { name: 'LOGIN' })).toBeDisabled()
@@ -84,7 +82,7 @@ test.describe('login form tests', () => {
     page,
   }) => {
     // E-mail input
-    await page.getByLabel('Email').pressSequentially(existingUser.email)
+    await page.getByLabel('Email').fill(existingUser.email)
 
     // Password , clear input
     await page.getByLabel('Password', { exact: true }).clear()
@@ -97,12 +95,10 @@ test.describe('login form tests', () => {
     page,
   }) => {
     // E-mail input
-    await page.getByLabel('Email').pressSequentially(existingUser.email)
+    await page.getByLabel('Email').fill(existingUser.email)
 
     // Password input, using 8 character password
-    await page
-      .getByLabel('Password', { exact: true })
-      .pressSequentially('12345678')
+    await page.getByLabel('Password', { exact: true }).fill('12345678')
 
     // Expect submit button to be disabled
     await expect(page.getByRole('button', { name: 'LOGIN' })).toBeDisabled()
@@ -114,7 +110,7 @@ test.describe('login form tests', () => {
     // Password input
     await page
       .getByLabel('Password', { exact: true })
-      .pressSequentially(existingUser.password)
+      .fill(existingUser.password)
 
     // Expect password to be hidden
     await expect(page.getByLabel('Password', { exact: true })).toHaveAttribute(

@@ -7,6 +7,7 @@ export default defineConfig({
   projects: [
     // Setup project
     { name: 'setup', testDir: './test-setup/', testMatch: '*' },
+    // Chromium project
     {
       name: 'chromium',
       testDir: './tests/',
@@ -15,6 +16,18 @@ export default defineConfig({
         // Use "database" with existing accounts
         storageState: setupFile,
       },
+      dependencies: ['setup'],
+    },
+    // Mobile Chrome project
+    {
+      name: 'mobile chrome',
+      use: { ...devices['Pixel 7'] },
+      dependencies: ['setup'],
+    },
+    // Tablet project
+    {
+      name: 'tablet',
+      use: { ...devices['iPad (gen 7)'] },
       dependencies: ['setup'],
     },
   ],

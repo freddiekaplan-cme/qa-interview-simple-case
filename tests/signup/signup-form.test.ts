@@ -49,6 +49,12 @@ test.describe('signup form works and logging in is possible', () => {
     // Wait for login page to load
     await page.waitForURL(LOGIN_URL)
 
+    // Try to go to homepage while logged out
+    await page.goto(BASE_URL)
+
+    // Wait for login page to load after being redirected from homepage
+    await page.waitForURL(LOGIN_URL)
+
     // Fill in login fields
     await page.getByRole('textbox', { name: 'Email' }).fill(newUser.email)
     await page.getByRole('textbox', { name: 'Password' }).fill(newUser.password)
